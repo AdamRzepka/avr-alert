@@ -38,7 +38,7 @@ MCU := atmega169
 GPR := build.gpr
 
 # put the names of the target files here (without extension)
-ADA_TARGETS := temperature
+ADA_TARGETS := avralert
 
 
 #---------------- GNATMAKE Options ----------------
