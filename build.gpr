@@ -1,0 +1,11 @@
+                                        -- 1: enable access to the standard AVR library by extending
+project Build extends "avr_app.gpr" is  -- 2: the name of the project has to match the file name
+
+   for Main use ("temperature");             -- 4: the name of the main program
+
+   for Object_Dir use "obj";            -- 6: hide the generated files in a subdir
+   for Exec_Dir use ".";                -- 7: keep the main files in the current directory
+
+   for Source_Files use ("temperature.adb"); -- 9: the list of required source files
+
+end Build;
