@@ -8,6 +8,14 @@ project Build extends "avr_app.gpr" is  -- 2: the name of the project has to mat
 
    for Source_Files use ("temperature.adb",
 			 "temperature.ads",
+			 "timer.ads",
+			 "timer.adb",
+                         "sound.ads",
+                         "sound.adb",
 			 "avralert.adb"); -- 9: the list of required source files
+   
+--   package Compiler is
+--      for Default_Switches ("Ada") use ("-S", "-gnatp");
+--   end Compiler;
 
 end Build;

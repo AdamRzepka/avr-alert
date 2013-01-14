@@ -12,6 +12,7 @@ with AVR.Sleep;
 with AVR.Wait;
 
 with Temperature;
+with Sound;
 
 
 package body Timer is
@@ -29,6 +30,7 @@ package body Timer is
       UART.Put_Line("Wake UP!!!");
       UART.Put(Integer_16(Temperature.Read));
       UART.New_Line;
+      Sound.Update;
       UART.Put_Line("Go to sleep");
 --      Wait(10);
    end Timer_Handler;
