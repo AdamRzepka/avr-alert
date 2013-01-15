@@ -15,6 +15,9 @@ package body Application is
       UART.Put_Line("In Update.");
       UART.Put(Integer_16(Temperature.Read));
       UART.New_Line;
+      if Temperature.Is_Changing_Fast then
+         Sound.Start;
+      end if;
       Sound.Update;
    end Update;
    

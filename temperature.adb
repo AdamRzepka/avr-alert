@@ -6,8 +6,19 @@ use AVR;
 
 with AVR.ADC;
 with AVR.MCU;
+with AVR.UART;
 
 package body Temperature is
+
+   type Temp_Record is
+      record
+         Value: ADC.Conversion_10bit;
+         Timestamp: Unsigned_32;
+      end record;
+
+   Counter: Unsigned_32 := 0;
+   Max: Temp_Record := (Value => 0, Timestamp => 0);
+   Min: Temp_Record := (Value => 1023, Timestamp => 0);
 
    procedure Init is
    begin
@@ -43,6 +54,7 @@ package body Temperature is
       Result: ADC.Conversion_10bit;
       Temp: Temp_T;
    begin
+      Counter := Counter + 1;
       -- wlaczenie napiecia dla termistora
       MCU.PORTF_Bits(MCU.PORTF3_Bit) := True;
       MCU.DDRF_Bits(MCU.DDF3_Bit) := True;
@@ -52,8 +64,26 @@ package body Temperature is
       MCU.PORTF_Bits(MCU.PORTF3_Bit) := False;
       MCU.DDRF_Bits(MCU.DDF3_Bit) := False;
 
+      if Result >= Max.Value or Counter - Max.Timestamp >= 30 then
+         Max := (Value => Result, Timestamp => Counter);
+      end if;
+
+      if Result <= Min.Value or Counter - Min.Timestamp >= 30 then
+         Min := (Value => Result, Timestamp => Counter);
+      end if;
+
       Temp := Calc_Temp(Result);
       return Temp;
    end Read;
+
+   function Is_Changing_Fast return Boolean is
+      Amplitude: Integer_16;
+   begin
+      Amplitude := Integer_16(Max.Value) - Integer_16(Min.Value);
+      UART.Put("Amplitude: ");
+      UART.Put(Amplitude);
+      UART.New_Line;
+      return (Amplitude >= 4);
+   end Is_Changing_Fast;
 
 end Temperature;
