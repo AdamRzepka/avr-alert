@@ -12,6 +12,8 @@ project Build extends "avr_app.gpr" is  -- 2: the name of the project has to mat
 			 "timer.adb",
                          "sound.ads",
                          "sound.adb",
+                         "application.ads",
+                         "application.adb",
 			 "avralert.adb"); -- 9: the list of required source files
    
 --   package Compiler is
