@@ -35,12 +35,14 @@ package body Sound is
 
    procedure Start is
    begin
+      UART.Put_Line("Sound start");
       Started := True;
 --      Playing := False;
    end Start;
 
    procedure Stop is
    begin
+      UART.Put_Line("Sound stop");
       Pause;
       Started := False;
       Playing := False;

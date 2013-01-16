@@ -6,7 +6,7 @@ use AVR;
 
 with AVR.ADC;
 with AVR.MCU;
-with AVR.UART;
+--with AVR.UART;
 
 package body Temperature is
 
@@ -64,11 +64,11 @@ package body Temperature is
       MCU.PORTF_Bits(MCU.PORTF3_Bit) := False;
       MCU.DDRF_Bits(MCU.DDF3_Bit) := False;
 
-      if Result >= Max.Value or Counter - Max.Timestamp >= 30 then
+      if Result >= Max.Value or Counter - Max.Timestamp >= 20 then
          Max := (Value => Result, Timestamp => Counter);
       end if;
 
-      if Result <= Min.Value or Counter - Min.Timestamp >= 30 then
+      if Result <= Min.Value or Counter - Min.Timestamp >= 20 then
          Min := (Value => Result, Timestamp => Counter);
       end if;
 
@@ -80,10 +80,10 @@ package body Temperature is
       Amplitude: Integer_16;
    begin
       Amplitude := Integer_16(Max.Value) - Integer_16(Min.Value);
-      UART.Put("Amplitude: ");
-      UART.Put(Amplitude);
-      UART.New_Line;
-      return (Amplitude >= 4);
+      --  UART.Put("Amplitude: ");
+      --  UART.Put(Amplitude);
+      --  UART.New_Line;
+      return (Amplitude >= 6);
    end Is_Changing_Fast;
 
 end Temperature;

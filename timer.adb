@@ -41,7 +41,7 @@ package body Timer is
    procedure Sleep is
    begin
       loop
-         AVR.Sleep.Go_Sleeping;
+         null;--AVR.Sleep.Go_Sleeping;
       end loop;
    end Sleep;
 
