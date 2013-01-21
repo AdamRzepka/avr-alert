@@ -16,6 +16,10 @@ project Build extends "avr_app.gpr" is  -- 2: the name of the project has to mat
                          "application.adb",
                          "button.ads",
                          "button.adb",
+                         "lcd_driver.ads",
+                         "lcd_driver.adb",
+                         "lcd_functions.ads",
+                         "lcd_functions.adb",
 			 "avralert.adb"); -- 9: the list of required source files
    
 --   package Compiler is

@@ -86,4 +86,10 @@ package body Temperature is
       return (Amplitude >= 6);
    end Is_Changing_Fast;
 
+   procedure Clear_Amplitude is
+   begin
+      Max := (Value => 0, Timestamp => 0);
+      Min := (Value => 1023, Timestamp => 0);
+   end;
+
 end Temperature;

@@ -4,4 +4,5 @@ package Temperature is
    procedure Init;
    function Read return Temp_T;
    function Is_Changing_Fast return Boolean;
+   procedure Clear_Amplitude;
 end Temperature;
