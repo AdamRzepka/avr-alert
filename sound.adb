@@ -4,7 +4,7 @@ use AVR;
 with AVR.Timer1;
 with AVR.MCU;
 with AVR.Interrupts;
-with AVR.UART;
+--with AVR.UART;
 
 package body Sound is
    Volume: Unsigned_16 := 80;
@@ -15,18 +15,18 @@ package body Sound is
       Timer1.Init_PWM(Timer1.No_Prescaling, Timer1.Phase_Freq_Correct_PWM_ICR, False);
       MCU.DDRB_Bits(5) := True;         --  set OC1A as output
       MCU.OCR1A := Volume;
-      UART.Put_Line("Sound initialized");
+--      UART.Put_Line("Sound initialized");
    end Init;
 
    procedure Update is                  --  plays alert sound
    begin
       if Started then
          if Playing then
-            UART.Put_Line("Sound pause");
+--            UART.Put_Line("Sound pause");
             Pause;
             Playing := False;
          else
-            UART.Put_Line("Sound playing");
+--            UART.Put_Line("Sound playing");
             PlayTone(310);
             Playing := True;
          end if;
@@ -35,14 +35,14 @@ package body Sound is
 
    procedure Start is
    begin
-      UART.Put_Line("Sound start");
+--      UART.Put_Line("Sound start");
       Started := True;
 --      Playing := False;
    end Start;
 
    procedure Stop is
    begin
-      UART.Put_Line("Sound stop");
+--      UART.Put_Line("Sound stop");
       Pause;
       Started := False;
       Playing := False;

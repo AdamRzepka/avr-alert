@@ -64,11 +64,11 @@ package body Temperature is
       MCU.PORTF_Bits(MCU.PORTF3_Bit) := False;
       MCU.DDRF_Bits(MCU.DDF3_Bit) := False;
 
-      if Result >= Max.Value or Counter - Max.Timestamp >= 20 then
+      if Result >= Max.Value or Counter - Max.Timestamp >= 30 then
          Max := (Value => Result, Timestamp => Counter);
       end if;
 
-      if Result <= Min.Value or Counter - Min.Timestamp >= 20 then
+      if Result <= Min.Value or Counter - Min.Timestamp >= 30 then
          Min := (Value => Result, Timestamp => Counter);
       end if;
 
@@ -83,7 +83,7 @@ package body Temperature is
       --  UART.Put("Amplitude: ");
       --  UART.Put(Amplitude);
       --  UART.New_Line;
-      return (Amplitude >= 6);
+      return (Amplitude >= 4);
    end Is_Changing_Fast;
 
    procedure Clear_Amplitude is

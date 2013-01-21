@@ -27,9 +27,12 @@ package body Application is
       UART.Put(Integer_16(Temp));
       UART.New_Line;
       if Temperature.Is_Changing_Fast then
+         Temperature.Clear_Amplitude;
+         LCD_Driver.Update_Is_Required := False;
+         UART.Put_Line("Alert raised!");
          Sound.Start;
          LCD_Functions.Clear;
-         LCD_Functions.Put("ALERT!");
+         LCD_Functions.Put("ALERT");
          Playing := True;
       end if;
       Sound.Update;
@@ -51,6 +54,8 @@ package body Application is
                Sound.Stop;
                Playing := False;
             --  else
+            --     LCD_Functions.Clear;
+            --     LCD_Functions.Put("ALERT!");
             --     Sound.Start;
             --     Playing := True;
             end if;
